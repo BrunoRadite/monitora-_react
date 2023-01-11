@@ -17,9 +17,10 @@ import FormCaldeiraPage from './FormCaldeiraPage';
 export default function DashboardPage() {
     const dispatch = useDispatch();
     const activeMenu = useSelector(useActiveMenu)
-    dispatch(setDisplayMenu('dashboard'));
+
 
     useEffect(() => {
+        dispatch(setDisplayMenu('dashboard'));
         dispatch(clearCaldeiras())
         getCaldeiras().then((response) => {
             response.data.map((caldeira: Caldeiras) => dispatch(addCaldeira(caldeira)));

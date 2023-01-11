@@ -20,9 +20,6 @@ export default function FormCaldeiraPage({ close, isEdit, id }: Props) {
 
 
     const dispatch = useDispatch();
-    // update route
-    dispatch(setDisplayMenu('dashboard'))
-
 
     // controller nome
     const [nome, setNome] = useState('');

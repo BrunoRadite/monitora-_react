@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { Button } from '../components/Button';
 import { Column } from '../components/Column';
 import { Form } from '../components/Forms/Form';
@@ -21,7 +21,8 @@ function LoginPage() {
 
     const dispatch = useDispatch();
 
-    dispatch(setDisplayMenu('login'))
+    useEffect(() => { dispatch(setDisplayMenu('login')) })
+
     //controller email
     const [email, setEmail] = useState('');
     //controller password

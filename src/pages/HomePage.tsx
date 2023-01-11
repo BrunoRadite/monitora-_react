@@ -14,7 +14,8 @@ export default function HomePage() {
 
     const caldeiras = useSelector(useCaldeiras);
     const dispatch = useDispatch();
-    dispatch(setDisplayMenu(''));
+    useEffect(() => { dispatch(setDisplayMenu('')); })
+
     const activeMenu = useSelector(useActiveMenu);
     return (
         <ContainerFullScreen
