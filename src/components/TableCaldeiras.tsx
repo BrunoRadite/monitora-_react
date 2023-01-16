@@ -2,9 +2,9 @@ import React from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCaldeira, Caldeiras, clearCaldeiras, useCaldeiras } from '../controllers/sliceCaldeiras';
-import { Delete, Edit } from '@mui/icons-material';
 import { deleteCaldeira, getCaldeiras } from '../services/caldeiras';
-import { Button } from './Button';
+import { Button } from 'primereact/button';
+
 
 
 
@@ -24,10 +24,9 @@ export default function TableCaldeiras({ edit }: Props) {
         });
     }
 
-    const styleButton = { padding: '11px', paddingTop: '10px', paddingBottom: '5px', borderRadius: '50px' };
     return (
         <TableContainer component={Paper} variant='outlined' sx={{
-            backgroundColor: 'transparent', width: 'auto', maxHeight: 'calc(100vh - 250px)'
+            backgroundColor: 'transparent', width: 'auto', maxHeight: 'calc(100vh - 260px)'
         }}>
             <Table>
                 {/* columns */}
@@ -37,7 +36,7 @@ export default function TableCaldeiras({ edit }: Props) {
                         <TableCell >NOME</TableCell>
                         <TableCell >MODELO</TableCell>
                         <TableCell >TEMPERATURA MÁXIMA</TableCell>
-                        <TableCell align='right'><div style={{ marginRight: '30px' }}>AÇÕES</div></TableCell></TableRow>
+                        <TableCell align='right'><div style={{ marginRight: '25px' }}>AÇÕES</div></TableCell></TableRow>
                 </TableHead>
                 {/* rows */}
                 <TableBody>{
@@ -48,10 +47,14 @@ export default function TableCaldeiras({ edit }: Props) {
                             <TableCell>{caldeira.modelo}</TableCell>
                             <TableCell>{caldeira.temperatura_max_celsius + ' ºC'} </TableCell>
                             <TableCell align='right'>
-                                <span >
+                                <span className="p-buttonset">
+                                    <Button icon="pi pi-pencil" onClick={() => edit(true, caldeira.id)} />
+                                    <Button icon="pi pi-trash" onClick={() => deleteCal({ id: caldeira.id })} />
+                                </span>
+                                {/* <span >
                                     <Button isClose={true} onClick={() => deleteCal({ id: caldeira.id })} style={styleButton}> <Delete /></Button>
                                     <Button onClick={() => edit(true, caldeira.id)} style={styleButton}> <Edit /></Button>
-                                </span>
+                                </span> */}
                             </TableCell></TableRow>)
                 }</TableBody>
             </Table>

@@ -23,3 +23,24 @@ api.interceptors.request.use(
         Promise.reject(error.response || error.message);
     }
 );
+
+// interceptor response
+api.interceptors.response.use(response => {
+    return response;
+}, (err) => {
+    return new Promise((resolve, reject) => {
+        const originalReq = err.config;
+        // if error is 401, if exist config and not type retry
+        if (err.response.status == 401 && err.config && !err.config._retry) {
+            originalReq._retry = true;
+            let res = api.post('token/refresh/', { refresh: localStorage.getItem('refreshToken') }).then((res) => {
+                localStorage.setItem('accessToken', res.data.access);
+                originalReq.headers['Authorization'] = `Bearer ${res.data.access}`
+                return api(originalReq)
+            });
+            resolve(res);
+        } else {
+            reject(err);
+        }
+    })
+});

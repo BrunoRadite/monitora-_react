@@ -1,21 +1,22 @@
-import { Search } from '@mui/icons-material';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import React, { useEffect, useState } from 'react';
-import ReactLoading from 'react-loading';
-import { useDispatch, useSelector } from 'react-redux';
-import { BarActionDashboard } from '../components/BarActionDashboard';
-import CardCaldeira from '../components/CardCaldeira/CardCaldeira';
-import { Column } from '../components/Column';
-import { ContainerFullScreen } from '../components/ContainerFullScreen';
-import TableCaldeiras from '../components/TableCaldeiras';
-import { useActiveMenu } from '../controllers/sliceActiveMenu';
-import { addCaldeira, Caldeiras, clearCaldeiras, filterCaldeiras, restoreToState } from '../controllers/sliceCaldeiras';
-import { setDisplayMenu } from '../controllers/sliceMenu';
-import { getCaldeiras } from '../services/caldeiras';
-import FormCaldeiraPage from './FormCaldeiraPage';
+import { Search } from "@mui/icons-material";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
+import React, { useEffect, useState } from "react";
+import ReactLoading from "react-loading";
+import { useDispatch, useSelector } from "react-redux";
+import { BarActionDashboard } from "../components/BarActionDashboard";
+import CardCaldeira from "../components/CardCaldeira/CardCaldeira";
+import { Column } from "../components/Column";
+import { ContainerFullScreen } from "../components/ContainerFullScreen";
+import TableCaldeiras from "../components/TableCaldeiras";
+import { useActiveMenu } from "../controllers/sliceActiveMenu";
+import { addCaldeira, Caldeiras, clearCaldeiras, filterCaldeiras, restoreToState } from "../controllers/sliceCaldeiras";
+import { setDisplayMenu } from "../controllers/sliceMenu";
+import { getCaldeiras } from "../services/caldeiras";
+import FormCaldeiraPage from "./FormCaldeiraPage";
 
-export default function DashboardPage() {
+
+export default function G6() {
     const dispatch = useDispatch();
     const activeMenu = useSelector(useActiveMenu)
 
@@ -104,4 +105,4 @@ export default function DashboardPage() {
             </Column>}
         </ContainerFullScreen>
     );
-};
+}

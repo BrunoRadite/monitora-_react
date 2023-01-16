@@ -6,7 +6,6 @@ import { Button } from '../components/Button';
 import { useDispatch } from 'react-redux';
 import { addCaldeira, Caldeiras, clearCaldeiras } from '../controllers/sliceCaldeiras';
 import { caldeiraDetails, createCaldeira, getCaldeiras, updateCaldeira } from '../services/caldeiras';
-import { setDisplayMenu } from '../controllers/sliceMenu';
 
 
 interface Props {
@@ -33,9 +32,9 @@ export default function FormCaldeiraPage({ close, isEdit, id }: Props) {
     // controller temp
     const [temp, setTemp] = useState('');
 
+
     useEffect(() => {
         if (isEdit && id) {
-
             caldeiraDetails({ id: id }).then((response) => {
                 const cal: Caldeiras = response.data;
                 setNome(cal.nome!)
@@ -44,7 +43,9 @@ export default function FormCaldeiraPage({ close, isEdit, id }: Props) {
                 setTemp(`${cal.temperatura_max_celsius!}`)
             });
         }
+
     }, []);
+
 
 
     const body: Caldeiras = { nome: nome, modelo: modelo, temperatura_max_celsius: parseInt(temp), foto: foto }
@@ -75,7 +76,6 @@ export default function FormCaldeiraPage({ close, isEdit, id }: Props) {
             // on reader load somthing...
             reader.onload = () => {
                 // Make a fileInfo Object
-                console.log("Called", reader);
                 baseURL = reader.result;
                 resolve(baseURL);
             };
@@ -91,9 +91,8 @@ export default function FormCaldeiraPage({ close, isEdit, id }: Props) {
                 setFoto(file.base64);
             })
             .catch(err => {
-                console.log(err);
+                alert(err);
             });
-
     };
 
 
@@ -108,7 +107,7 @@ export default function FormCaldeiraPage({ close, isEdit, id }: Props) {
                 </div>
                 <Form>
                     <div style={{ display: 'flex', marginBottom: '15px' }}>
-                        <img style={{ height: 105, width: 105, minWidth: 105 }} src={foto !== '' ? foto : 'https://www.megapecascuritiba.com.br/loja/img/system/sem-imagem.gif'}></img>
+                        <img style={{ height: 105, width: 105, minWidth: 105 }} src={foto !== '' ? foto : 'https://www.megapecascuritiba.com.br/loja/img/system/sem-imagem.gif'} alt={''}></img>
 
                         <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '20px', width: '480px' }}>
                             <div style={{ display: 'flex' }}><label>Foto:</label></div>

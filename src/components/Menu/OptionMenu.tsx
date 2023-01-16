@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-var url = window.location.href.split('/').at(-1)
 // Custom Button OptionMenu NavBar
 export const OptionMenu = styled.button<Props>`
     padding: 0px;

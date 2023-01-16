@@ -5,6 +5,8 @@ import { Title } from "./Title";
 
 export const Drawer = styled.nav`
     width: max-content;
+    max-height: 100vh;
+    overflow: auto;
     padding: 0px;
     background-color: #111B21;
     transition-property: width;

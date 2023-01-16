@@ -1,6 +1,5 @@
-import { Delete, Edit } from "@mui/icons-material";
-import { display } from "@mui/system";
 import React from "react";
+import { Delete, Edit } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { addCaldeira, Caldeiras, clearCaldeiras, useCaldeiras } from "../../controllers/sliceCaldeiras"
 import { deleteCaldeira, getCaldeiras } from "../../services/caldeiras";
@@ -28,12 +27,13 @@ export default function CardCaldeira({ edit }: Props) {
     }
 
     const styleButton = { padding: '11px', paddingTop: '10px', paddingBottom: '5px', borderRadius: '50px' };
-    return (<div style={{ maxHeight: 'calc(100vh - 250px)', overflow: 'auto' }}><Wrap>
+    return (<div style={{ maxHeight: 'calc(100vh - 260px)', overflow: 'auto' }}><Wrap>
         {caldeiras.map((caldeira) =>
             <Card key={caldeira.id}>
                 <Column style={{ height: 'auto' }}>
                     <img
                         style={{ height: '200px', width: '100%', borderRadius: '3px' }}
+                        alt={''}
                         src={caldeira.foto !== '' ? caldeira.foto : 'https://www.megapecascuritiba.com.br/loja/img/system/sem-imagem.gif'}>
                     </img>
                     <DivInformations >

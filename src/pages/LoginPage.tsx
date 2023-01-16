@@ -1,8 +1,6 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
-import { Button } from '../components/Button';
 import { Column } from '../components/Column';
 import { Form } from '../components/Forms/Form';
-import { Input } from '../components/Forms/Input';
 import { DescriptionContainer } from '../components/LoginPage/DescriptionContainer';
 import { FormContainer } from '../components/LoginPage/FormContainer';
 import { InnerContainer } from '../components/InnerContainer';
@@ -11,12 +9,16 @@ import { useNavigate } from 'react-router-dom';
 import { ContainerFullScreen } from '../components/ContainerFullScreen';
 import { useDispatch } from 'react-redux';
 import { setDisplayMenu } from '../controllers/sliceMenu';
+import { Password } from 'primereact/password';
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
 
 
 // Login Page
 function LoginPage() {
     // clear of token
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
@@ -43,7 +45,11 @@ function LoginPage() {
         // disabled of button
         setDisabled(true);
         // if then redirect for home, else set disabled false
-        GetAccessToken({ body: body }).then(resp => localStorage.setItem('accessToken', resp.data.access)).then((_) => navigate('/')).catch((e) => { setDisabled(false); alert(e); })
+        GetAccessToken({ body: body }).then(resp => {
+            localStorage.setItem('accessToken', resp.data.access);
+            localStorage.setItem('refreshToken', resp.data.refresh);
+        }).then((_) =>
+            navigate('/')).catch((e) => { setDisabled(false); alert(e); })
     }
     return (<ContainerFullScreen isLogin={true}>
         <InnerContainer >
@@ -61,15 +67,27 @@ function LoginPage() {
                         width: '290px',
                     }}>
                         <Form>
-                            <Input type='email' name='email' id='email' value={email} onChange={(t) => setEmail(t.currentTarget.value)}></Input>
-                            <Input type='password' name='password' id='password' value={password} onChange={(t) => setPassword(t.currentTarget.value)}></Input>
+                            <div className="p-inputgroup" style={{ marginBottom: '15px' }}>
+                                <span className="p-inputgroup-addon">
+                                    <i className="pi pi-user"></i>
+                                </span>
+                                <InputText placeholder="Username" value={email} onChange={(e) => setEmail(e.currentTarget.value)} />
+                            </div>
+                            <div className="p-inputgroup" style={{ marginBottom: '15px' }}>
+                                <span className="p-inputgroup-addon">
+                                    <i className="pi pi-lock"></i>
+                                </span>
+
+                                <Password placeholder='Password' value={password} onChange={(e) => setPassword(e.currentTarget.value)} toggleMask={true} feedback={true} />
+                            </div>
                         </Form>
                     </div>
-                    <Button disabled={disabled} onClick={onClick}>LOGAR</Button>
+
+                    <Button label="Submit" disabled={disabled} onClick={onClick} aria-label="Submit" />
                 </Column>
             </FormContainer>
 
-        </InnerContainer></ContainerFullScreen>
+        </InnerContainer></ContainerFullScreen >
     );
 }
 
